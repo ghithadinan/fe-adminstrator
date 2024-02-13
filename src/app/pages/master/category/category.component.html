@@ -68,7 +68,6 @@
     </div>
     <div class="modal-footer">
       <app-button [loading]="loading"
-                  [btnDisabled]="fromGroup.invalid || actionTitle === ACTION_TILE.CREATE ? selectedImage === null : false"
                   btnClass="btn-primary"
                   btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
                   btnType="submit">
