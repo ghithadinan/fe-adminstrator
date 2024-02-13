@@ -21,18 +21,18 @@
 <ng-template #formModal let-modal role="document">
   <form (ngSubmit)="onSubmit()" [formGroup]="fromGroup">
     <div class="modal-header">
-      <h5 class="modal-title mt-0">Form {{actionTitle}} {{title}}</h5>
+      <h5 class="modal-title mt-0">Form {{ actionTitle }} {{ title }}</h5>
       <button (click)="modal.dismiss()" aria-hidden="true" class="btn-close" type="button"></button>
     </div>
     <div class="modal-body">
       <div class="row mb-3">
         <div class="col-lg-6">
-          <app-form-label>Name</app-form-label>
+          <app-form-label [mandatory]="true">Name</app-form-label>
           <input [ngClass]="{'is-invalid': submitted && f.name.errors}" class="form-control form-control-sm"
                  formControlName="name" id="name" placeholder="Name"
                  type="text"/>
           <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Name {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.name.errors.required">Name {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
                height="125"
                src="{{env.apiHost + '/file/' + uploadedImage?.id}}">
           <br *ngIf="uploadedImage !== null"/>
-          <app-form-label>Image</app-form-label>
+          <app-form-label [mandatory]="true">Image</app-form-label>
           <input #fileUpload (change)="onFileSelected($event.target)"
                  [ngClass]="{'is-invalid': submitted && ((actionTitle === ACTION_TILE.CREATE) && (selectedImage === null))}"
                  accept="image/gif,image/jpeg,image/jpg,image/png"
@@ -61,13 +61,16 @@
                  type="file"/>
           <div *ngIf="submitted && ((actionTitle === ACTION_TILE.CREATE) && (selectedImage === null))"
                class="invalid-feedback">
-            Image {{'VALIDATION_ERROR.REQUIRED' | translate}}
+            Image {{ 'VALIDATION_ERROR.REQUIRED' | translate }}
           </div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <app-button [loading]="loading" btnClass="btn-primary" btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
+      <app-button [loading]="loading"
+                  [btnDisabled]="fromGroup.invalid || actionTitle === ACTION_TILE.CREATE ? selectedImage === null : false"
+                  btnClass="btn-primary"
+                  btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
                   btnType="submit">
         Save
       </app-button>

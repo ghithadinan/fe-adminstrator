@@ -105,7 +105,10 @@ export class CategoryComponent implements OnInit {
   }
 
   onFileSelected(target: any) {
-    this.selectedImage = target.files[0];
+    this.selectedImage = null;
+    if (target.files[0]) {
+      this.selectedImage = target.files[0];
+    }
   }
 
   doneChangeData() {
