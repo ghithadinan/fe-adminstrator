@@ -1,0 +1,107 @@
+<div class="mb-5 text-md-end">
+  <ng-content></ng-content>
+</div>
+<div class="row mb-md-2">
+  <div class="col-sm-12 col-md-6">
+    <div class="dataTables_length"><label
+      class="d-inline-flex align-items-center">{{'TABLE.SHOW' | translate}}
+      <select (change)="onShowEntriesChange()" [(ngModel)]="state.entriesSize" [disabled]="loading"
+              aria-controls="tickets-table"
+              class="form-control form-control-sm mx-2" name="pageSize">
+        <option [ngValue]="15">15</option>
+        <option [ngValue]="25">25</option>
+        <option [ngValue]="50">50</option>
+        <option [ngValue]="100">100</option>
+      </select> {{'TABLE.ENTRIES' | translate}}</label></div>
+  </div>
+  <!-- Search -->
+  <div *ngIf="defaultSearch" class="col-sm-12 col-md-6">
+    <div class="dataTables_filter text-md-end" id="tickets-table_filter"><label
+      class="d-inline-flex align-items-center">{{'TABLE.SEARCH' | translate}}:
+      <input (change)="onSearch()" [(ngModel)]="state.searchTerm" [disabled]="loading"
+             aria-controls="tickets-table"
+             class="form-control form-control-sm ms-2"
+             placeholder="{{'TABLE.SEARCH' | translate}}"
+             title="{{'TABLE.SEARCH' | translate}}"
+             name="searchTerm" type="text"></label></div>
+  </div>
+  <!-- End search -->
+</div>
+<!-- Table -->
+<div class="table-responsive">
+  <table [id]="tableId"
+         class="table table-bordered table-hover table-responsive table-sm">
+    <thead>
+    <tr>
+      <th (click)="onSort(head.data, head.orderable)" *ngFor="let head of tableHead; let i=index"
+          [ngClass]="{'orderable': (head.orderable === true && loading === false), 'table-light' :  state.sortColumn === head.data}"
+          [width]="head.titleWidth">{{head.title}}
+        <i *ngIf="state.sortColumn === head.data"
+           [ngClass]="{'mdi-sort-ascending' : state.sortDirection === 'asc', 'mdi-sort-descending' : state.sortDirection === 'desc'}"
+           class="mdi bx-pull-right"></i>
+      </th>
+      <th *ngIf="editCall.observers.length > 0 || deleteCall.observers.length > 0"
+          class="text-center table-padding-action-width">Action
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of datas; let id = index">
+      <td *ngFor="let cntn of data; let i= index"
+          [ngClass]="{'table-light': (head[i - 1]?.data === state.sortColumn)}"><span [innerHTML]="cntn"></span>
+      </td>
+      <td *ngIf="editCall.observers.length > 0 || deleteCall.observers.length > 0 || detailCall.observers.length > 0"
+          class="text-center">
+        <div class="button-items">
+          <button (click)="edit(id)" *ngIf="editCall.observers.length > 0" class="btn btn-primary btn-rounded btn-sm"
+                  title="Edit" type="button">
+            <i class="mdi mdi-pencil"></i>
+          </button>
+          <button (click)="detail(id)" *ngIf="detailCall.observers.length > 0"
+                  class="btn btn-success btn-rounded btn-sm"
+                  title="Detail" type="button">
+            <i class="mdi mdi-magnify-plus-outline"></i>
+          </button>
+          <button (click)="delete(id)" *ngIf="deleteCall.observers.length > 0" class="btn btn-danger btn-rounded btn-sm"
+                  title="Delete" type="button">
+            <i class="mdi mdi-trash-can"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td *ngIf="loading" class="text-center"
+          [colSpan]="(editCall.observers.length > 0 || deleteCall.observers.length > 0 || detailCall.observers.length > 0) ? tableHead.length + 1 : tableHead.length">
+        <div class="spinner-border text-dark m-1" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </td>
+    </tr>
+    <tr *ngIf="!loading && datas.length === 0">
+      <td
+        [colSpan]="editCall.observers.length > 0 || deleteCall.observers.length > 0 ? tableHead.length + 1 : tableHead.length"
+        class="text-center">{{'TABLE.EMPTY_RECORD' | translate}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- End table -->
+<div class="row justify-content-md-between align-items-md-center mt-2">
+  <div class="col-sm-12 col-md-5">
+    <div aria-live="polite" class="dataTables_info mb-2" id="tickets-table_info"
+         role="status">{{'TABLE.SHOWING' | translate}}
+      {{state.startIndex}} {{'TABLE.TO' | translate}}
+      {{state.endIndex}} {{'TABLE.OF' | translate}} {{state.totalRecords}}
+      {{'TABLE.ENTRIES_SMALL' | translate}}
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="col-sm-12 col-md-5">
+    <div class="text-md-right float-md-end pagination-rounded">
+      <ngb-pagination (pageChange)="onPageChange($event)" [(page)]="state.page" [collectionSize]="state.totalRecords"
+                      [disabled]="loading" [pageSize]="state.entriesSize">
+      </ngb-pagination>
+    </div>
+  </div>
+  <!-- End Pagination -->
+</div>

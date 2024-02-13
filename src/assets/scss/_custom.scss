@@ -1,0 +1,11 @@
+
+// dropdown
+.dropdown-toggle {
+  &:after {
+    display: none;
+  }
+}
+
+.table-padding-action-width {
+  width: 10%;
+}

@@ -1,0 +1,208 @@
+<div class="container-fluid">
+  <app-page-title title="{{title}}" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <div class="row">
+    <div class="col-xl-1">
+    </div>
+    <div class="col-xl-10">
+      <div class="card overflow-hidden">
+        <div class="bg-soft bg-primary">
+          <div class="row">
+            <div class="col-7">
+              <div class="text-primary p-3">
+                <h5 class="text-primary">Welcome Back !</h5>
+              </div>
+            </div>
+            <div class="col-5 align-self-end">
+              <img [height]="168" alt="" src="assets/images/profile-img.png">
+            </div>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="avatar-md profile-user-wid mb-4">
+                <img (click)="selectFile()" *ngIf="user?.profilePicture === null" alt=""
+                     class="img-thumbnail rounded-circle"
+                     src="assets/images/users/avatar-1.jpg">
+                <img (click)="selectFile()" *ngIf="user?.profilePicture !== null" alt=""
+                     class="img-thumbnail rounded-circle"
+                     src="{{env.apiHost + '/file/' + user?.profilePictureId}}">
+                <input #fileUpload accept="image/gif,image/jpeg,image/jpg,image/png"
+                       data-original-title="Upload Image"
+                       id="file"
+                       (change)="onFileSelected($event.target)"
+                       name="image" style="display: none"
+                       type="file">
+              </div>
+              <h5 class="font-size-15 text-truncate">{{user?.name}}</h5>
+              <p class="text-muted mb-0 text-truncate">{{user?.role?.name}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Personal Information</h4>
+          <form (ngSubmit)="updateProfile()" [formGroup]="formGroupProfile">
+            <input class="form-control form-control-sm"
+                   formControlName="profilePictureId" id="profile-picture-id"
+                   type="hidden"/>
+            <div class="table-responsive">
+              <table class="table table-nowrap mb-0">
+                <tbody>
+                <tr>
+                  <th scope="row">Name :</th>
+                  <td>
+                    <input [ngClass]="{'is-invalid': submitedProfile && fProfile.name.errors}"
+                           class="form-control form-control-sm"
+                           formControlName="name" id="name" placeholder="Name"
+                           type="text"/>
+                    <div *ngIf="submitedProfile && fProfile.name.errors" class="invalid-feedback">
+                      <div *ngIf="fProfile.name.errors.required">Name {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">E-mail :</th>
+                  <td>
+                    <input [ngClass]="{'is-invalid': submitedProfile && fProfile.email.errors}"
+                           class="form-control form-control-sm"
+                           formControlName="email" id="email" placeholder="Email"
+                           type="text"/>
+                    <div *ngIf="submitedProfile && fProfile.email.errors" class="invalid-feedback">
+                      <div *ngIf="fProfile.email.errors.required">
+                        Email {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Phone Number :</th>
+                  <td>
+                    <input [ngClass]="{'is-invalid': submitedProfile && fProfile.phoneNumber.errors}"
+                           class="form-control form-control-sm"
+                           formControlName="phoneNumber" id="phoneNumber" placeholder="Phone Number"
+                           type="text"/>
+                    <div *ngIf="submitedProfile && fProfile.phoneNumber.errors" class="invalid-feedback">
+                      <div *ngIf="fProfile.phoneNumber.errors.required">
+                        Email {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Role :</th>
+                  <td>
+                    <input [value]="user?.role?.name ?? ''" class="form-control form-control-sm" disabled="disabled"/>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="text-md-end mt-4 me-2 mb-1">
+                <app-button [loading]="loading" btnClass="btn-primary btn-rounded"
+                            btnId="update-{{title.toLowerCase()}}"
+                            btnTitle="Update"
+                            btnType="sumbit">
+                  <i class="mdi mdi-pencil"></i>
+                </app-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end card -->
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Security</h4>
+          <form (ngSubmit)="updatePassword()" [formGroup]="formGroupPassword">
+            <div class="table-responsive">
+              <table class="table table-nowrap mb-0">
+                <tbody>
+                <tr>
+                  <th scope="row">Old Password :</th>
+                  <td>
+                    <div class="input-group auth-pass-inputgroup">
+                      <input #inputOldPassword
+                             [ngClass]="{'is-invalid': submitedPassword && fPassword.oldPassword.errors}"
+                             autocomplete="current-password"
+                             class="form-control form-control-sm"
+                             formControlName="oldPassword"
+                             id="old-password"
+                             placeholder="Old Password"
+                             type="password"/>
+                      <button (mousedown)="showPassword(1)" (mouseup)="hidePassword(1)" class="btn btn-light ms-0"
+                              type="button"><i
+                        class="mdi mdi-eye-outline"></i></button>
+                      <div *ngIf="submitedPassword && fPassword.oldPassword.errors" class="invalid-feedback">
+                        <div *ngIf="fPassword.oldPassword.errors.required">Old
+                          Password {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">New Password :</th>
+                  <td>
+                    <div class="input-group auth-pass-inputgroup">
+                      <input #inputNewPassword
+                             [ngClass]="{'is-invalid': submitedPassword && fPassword.newPassword.errors}"
+                             autocomplete="new-password"
+                             class="form-control form-control-sm"
+                             formControlName="newPassword"
+                             id="new-password"
+                             placeholder="New Password"
+                             type="password"/>
+                      <button (mousedown)="showPassword(2)" (mouseup)="hidePassword(2)" class="btn btn-light ms-0"
+                              type="button"><i
+                        class="mdi mdi-eye-outline"></i></button>
+                      <div *ngIf="submitedPassword && fPassword.newPassword.errors" class="invalid-feedback">
+                        <div *ngIf="fPassword.newPassword.errors.required">New
+                          Password {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Confirm Password :</th>
+                  <td>
+                    <div class="input-group auth-pass-inputgroup">
+                      <input #inputConfirmPassword
+                             [ngClass]="{'is-invalid': submitedPassword && fPassword.confirmPassword.errors}"
+                             autocomplete="new-password"
+                             class="form-control form-control-sm"
+                             formControlName="confirmPassword"
+                             id="confirm-password"
+                             placeholder="Confirm Password"
+                             type="password"/>
+                      <button (mousedown)="showPassword(3)" (mouseup)="hidePassword(3)" class="btn btn-light ms-0"
+                              type="button"><i
+                        class="mdi mdi-eye-outline"></i></button>
+                      <div *ngIf="submitedPassword && fPassword.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="fPassword.confirmPassword.errors.required">Confirm
+                          Password {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+                        <div *ngIf="fPassword.confirmPassword.errors.notMatched">Confirm
+                          Password {{'VALIDATION_ERROR.NOT_MATCHED' | translate}}</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="text-md-end mt-4 me-2 mb-1">
+                <app-button [loading]="loading" btnClass="btn-primary btn-rounded"
+                            btnId="update-password-{{title.toLowerCase()}}"
+                            btnTitle="Update"
+                            btnType="submit">
+                  <i class="mdi mdi-pencil"></i>
+                </app-button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+    <div class="col-xl-1">
+    </div>
+  </div>
+  <!-- end row -->
+</div>

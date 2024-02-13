@@ -1,0 +1,112 @@
+{
+  "HEADER": {
+    "SEARCH": "Search...",
+    "MEGA_MENU": "Mega Menu",
+    "NOTIFICATIONS": {
+      "TITLE": "Notifications",
+      "VIEW_ALL": "View All",
+      "LOAD_MORE": "View More..",
+      "FIRST": {
+        "TITLE": "Your order is placed",
+        "TEXT": "If several languages coalesce the grammar",
+        "TIME": "3 min ago"
+      },
+      "SECOND": {
+        "TITLE": "James Lemire",
+        "TEXT": "It will seem like simplified English.",
+        "TIME": "1 hours ago"
+      },
+      "THIRD": {
+        "TITLE": "Your item is shipped",
+        "TEXT": "If several languages coalesce the grammar",
+        "TIME": "3 min ago"
+      },
+      "FOUR": {
+        "TITLE": "Salena Layfield",
+        "TEXT": "As a skeptical Cambridge friend of mine occidental.",
+        "TIME": "1 hours ago"
+      }
+    },
+    "SETTINGS": "Settings",
+    "UI": {
+      "TITLE": "UI Components",
+      "LIGHTBOX": "LightBox",
+      "RANGE_SLIDER": "Range Slider",
+      "SWEET_ALERT": "Sweet Alert",
+      "RATING": "Rating",
+      "FORMS": "Forms",
+      "TABLES": "Tables",
+      "CHARTS": "Charts"
+    },
+    "APPLICATIONS": {
+      "TITLE": "Applications",
+      "ECOMMERCE": "Ecommerce",
+      "CALENDAR": "Calendar",
+      "EMAIL": "Email",
+      "PROJECTS": "Projects",
+      "TASKS": "Tasks",
+      "CONTACTS": "Contacts"
+    },
+    "EXTRA_PAGES": {
+      "TITLE": "Extra Pages",
+      "LIGHT_SIDEBAR": "Light Sidebar",
+      "COMPACT_SIDEBAR": "Compact Sidebar",
+      "HORIZONTAL_LAYOUT": "Horizontal layout",
+      "MAINTENANCE": "Maintenance",
+      "COMING SOON": "Coming Soon",
+      "TIMELINE": "Timeline",
+      "FAQ": "FAQs"
+    },
+    "LOGIN": {
+      "PROFILE": "Profile",
+      "MY_WALLET": "My Wallet",
+      "SETTINGS": "Settings",
+      "LOCK_SCREEN": "Lock screen",
+      "LOGOUT": "Logout"
+    }
+  },
+  "MENUITEMS": {
+    "MENU": {
+      "TEXT": "Menu"
+    },
+    "DASHBOARD": {
+      "TEXT": "Dashboard"
+    },
+    "ADMINISTRATOR_MANAGEMENT": {
+      "TEXT": "Administrator Management"
+    },
+    "ADMINISTRATOR": {
+      "TEXT": "Administrator"
+    },
+    "ROLE": {
+      "TEXT": "Role"
+    },
+    "MASTER": {
+      "TEXT": "Master"
+    },
+    "CATEGORY": {
+      "TEXT": "Category"
+    },
+    "SUBCATEGORY": {
+      "TEXT": "Sub Category"
+    },
+    "SUBCATEGORY_PRODUCT": {
+      "TEXT": "Sub Category Product"
+    }
+  },
+  "TABLE": {
+    "EMPTY_RECORD": "No records available",
+    "SEARCH": "Search",
+    "SHOW": "Show",
+    "ENTRIES": "Entries",
+    "ENTRIES_SMALL": "entries",
+    "SHOWING": "Showing",
+    "TO": "to",
+    "OF": "of"
+  },
+  "VALIDATION_ERROR": {
+    "REQUIRED": "is required",
+    "NOT_VALID": "not valid",
+    "NOT_MATCHED": "is not matched"
+  }
+}

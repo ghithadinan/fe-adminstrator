@@ -1,0 +1,5 @@
+<button (click)="click($event)" [disabled]="btnDisabled || loading" [id]="btnId" [title]="btnTitle" [type]="btnType"
+        [ngClass]="btnNgClass" class="btn btn-sm {{btnClass}}">
+  <span *ngIf="!loading"><ng-content></ng-content></span>
+  <i *ngIf="loading" class="bx bx-loader bx-spin font-size-16 align-middle"></i> <span *ngIf="loading">Loading</span>
+</button>

@@ -1,0 +1,74 @@
+<app-container [title]="title">
+  <app-card>
+    <app-table
+      (deleteCall)="onDelete($event)"
+      (editCall)="createOrUpdate($event, formModal)"
+      [head]="table.head"
+      [sort]="table.sort"
+      [tableId]="table.id"
+      [url]="table.url">
+      <div class="button-items">
+        <app-button (onClick)="createOrUpdate(null, formModal)" btnClass="btn-info btn-rounded"
+                    btnId="add-{{title.toLowerCase()}}"
+                    btnTitle="Create">
+          <i class="mdi mdi-plus mr-1"></i> Create
+        </app-button>
+      </div>
+    </app-table>
+  </app-card>
+</app-container>
+
+<ng-template #formModal let-modal role="document">
+  <form (ngSubmit)="onSubmit()" [formGroup]="fromGroup">
+    <div class="modal-header">
+      <h5 class="modal-title mt-0">Form {{actionTitle}} {{title}}</h5>
+      <button (click)="modal.dismiss()" aria-hidden="true" class="btn-close" type="button"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <app-form-label>Name</app-form-label>
+          <input [ngClass]="{'is-invalid': submitted && f.name.errors}" class="form-control form-control-sm"
+                 formControlName="name" id="name" placeholder="Name"
+                 type="text"/>
+          <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Name {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <app-form-label>Category</app-form-label>
+          <ng-select (change)="changeCategory($event)"
+                     [addTag]="addCategory"
+                     (clear)="onCategoryClear()"
+                     [items]="categoryOptions"
+                     [loading]="loadingCategory"
+                     [ngClass]="{'is-invalid': submitted && category === null}"
+                     bindLabel="name"
+                     class="ng-select-custom"
+                     formControlName="category"
+                     placeholder="Select Category"></ng-select>
+          <div *ngIf="submitted && category === null" class="invalid-feedback">
+            <div>Category {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-lg-6">
+          <app-form-label>Description</app-form-label>
+          <textarea class="form-control form-control-sm" formControlName="description"
+                    id="description" name="description" placeholder="Description" rows="5"
+                    type="text"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <app-button [loading]="loading" btnClass="btn-primary" btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
+                  btnType="submit">
+        Save
+      </app-button>
+      <button (click)="modal.close()" class="btn btn-light btn-sm" type="button">Close</button>
+    </div>
+  </form>
+</ng-template>
