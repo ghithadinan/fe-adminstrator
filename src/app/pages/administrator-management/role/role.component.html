@@ -22,18 +22,18 @@
 <ng-template #formModal let-modal role="document">
   <form (ngSubmit)="onSubmit()" [formGroup]="fromGroup">
     <div class="modal-header">
-      <h5 class="modal-title mt-0">Form {{actionTitle}} {{title}}</h5>
+      <h5 class="modal-title mt-0">Form {{ actionTitle }} {{ title }}</h5>
       <button (click)="modal.dismiss()" aria-hidden="true" class="btn-close" type="button"></button>
     </div>
     <div class="modal-body">
       <div class="row mb-3">
         <div class="col-lg-6">
-          <app-form-label>Name</app-form-label>
+          <app-form-label [mandatory]="true">Name</app-form-label>
           <input [ngClass]="{'is-invalid': submitted && f.name.errors}" class="form-control form-control-sm"
                  formControlName="name" id="name" placeholder="Name"
                  type="text"/>
           <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Name {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.name.errors.required">Name {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>

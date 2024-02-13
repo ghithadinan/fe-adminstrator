@@ -22,18 +22,18 @@
 <ng-template #formModal let-modal role="document">
   <form (ngSubmit)="onSubmit()" [formGroup]="fromGroup">
     <div class="modal-header">
-      <h5 class="modal-title mt-0">Form {{actionTitle}} {{title}}</h5>
+      <h5 class="modal-title mt-0">Form {{ actionTitle }} {{ title }}</h5>
       <button (click)="modal.dismiss()" aria-hidden="true" class="btn-close" type="button"></button>
     </div>
     <div class="modal-body">
       <div class="row mb-3">
         <div class="col-lg-6">
-          <app-form-label>Name</app-form-label>
+          <app-form-label [mandatory]="true">Name</app-form-label>
           <input [ngClass]="{'is-invalid': submitted && f.name.errors}" class="form-control form-control-sm"
                  formControlName="name" id="name" placeholder="Name"
                  type="text"/>
           <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-            <div *ngIf="f.name.errors.required">Name {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.name.errors.required">Name {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>
@@ -44,8 +44,8 @@
                  formControlName="email" id="email" placeholder="Email"
                  type="text"/>
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
-            <div *ngIf="f.email.errors.email">Email {{'VALIDATION_ERROR.NOT_VALID' | translate}}</div>
+            <div *ngIf="f.email.errors.required">Email {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
+            <div *ngIf="f.email.errors.email">Email {{ 'VALIDATION_ERROR.NOT_VALID' | translate }}</div>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
                  placeholder="Phone Number"
                  type="text"/>
           <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
-            <div *ngIf="f.phoneNumber.errors.required">Phone Number {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.phoneNumber.errors.required">Phone Number {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>
@@ -69,10 +69,10 @@
                   formControlName="roleId"
                   id="role-id">
             <option value="">Select Role</option>
-            <option *ngFor="let role of roleOptions;" [value]="role.id">{{role.name}}</option>
+            <option *ngFor="let role of roleOptions;" [value]="role.id">{{ role.name }}</option>
           </select>
           <div *ngIf="submitted && f.roleId.errors" class="invalid-feedback">
-            <div *ngIf="f.roleId.errors.required">Role Id {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.roleId.errors.required">Role Id {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
                  placeholder="Password"
                  type="password"/>
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+            <div *ngIf="f.password.errors.required">Password {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>
         </div>
       </div>
@@ -99,9 +99,11 @@
                  type="password"/>
           <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
             <div *ngIf="f.confirmPassword.errors.required">Confirm
-              Password {{'VALIDATION_ERROR.REQUIRED' | translate}}</div>
+              Password {{ 'VALIDATION_ERROR.REQUIRED' | translate }}
+            </div>
             <div *ngIf="f.confirmPassword.errors.notMatched">Confirm
-              Password {{'VALIDATION_ERROR.NOT_MATCHED' | translate}}</div>
+              Password {{ 'VALIDATION_ERROR.NOT_MATCHED' | translate }}
+            </div>
           </div>
         </div>
       </div>
