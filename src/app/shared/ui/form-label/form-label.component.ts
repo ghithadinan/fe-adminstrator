@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class FormLabelComponent implements OnInit {
 
   @Input() formLableClass = 'col-form-label-sm';
+  @Input() mandatory = false;
 
   constructor() {
   }
