@@ -39,19 +39,16 @@
       <div class="row mb-3">
         <div class="col-lg-6">
           <app-form-label>Category</app-form-label>
-          <ng-select
-            id="category"
-            [(ngModel)]="category"
-            [ngModelOptions]="{standalone: true}"
-            (change)="changeCategory($event)"
-            [addTag]="addCategory"
-            (clear)="onCategoryClear()"
-            [items]="categoryOptions"
-            [loading]="loadingCategory"
-            [ngClass]="{'is-invalid': submitted && category === null}"
-            bindLabel="name"
-            class="ng-select-custom"
-            placeholder="Select Category"></ng-select>
+          <ng-select (change)="changeCategory($event)"
+                     [addTag]="addCategory"
+                     (clear)="onCategoryClear()"
+                     [items]="categoryOptions"
+                     [loading]="loadingCategory"
+                     [ngClass]="{'is-invalid': submitted && category === null}"
+                     bindLabel="name"
+                     class="ng-select-custom"
+                     formControlName="category"
+                     placeholder="Select Category"></ng-select>
           <div *ngIf="submitted && category === null" class="invalid-feedback">
             <div>Category {{ 'VALIDATION_ERROR.REQUIRED' | translate }}</div>
           </div>

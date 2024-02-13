@@ -143,6 +143,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
   onCategoryClear() {
+    this.fromGroup.get('category').setValue(null);
     this.category = null;
   }
 

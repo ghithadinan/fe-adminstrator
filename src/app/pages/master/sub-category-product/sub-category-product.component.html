@@ -41,8 +41,6 @@
           <app-form-label>Category</app-form-label>
           <ng-select
             id="category"
-            [(ngModel)]="category"
-            [ngModelOptions]="{standalone: true}"
             (change)="changeCategory($event)"
             (clear)="onClearOptions(1)"
             [addTag]="addCategory"
@@ -51,6 +49,7 @@
             [ngClass]="{'is-invalid': submitted && category === null}"
             bindLabel="name"
             [readonly]="loading.data"
+            formControlName="category"
             class="ng-select-custom"
             placeholder="Select Category"></ng-select>
           <div *ngIf="submitted && category === null" class="invalid-feedback">
@@ -63,8 +62,7 @@
           <app-form-label>Sub Category</app-form-label>
           <ng-select
             id="subCategory"
-            [(ngModel)]="subCategory"
-            [ngModelOptions]="{standalone: true}"
+            formControlName="subCategory"
             (change)="changeSubCategory($event)"
             (clear)="onClearOptions(2)"
             [addTag]="addSubCategory"

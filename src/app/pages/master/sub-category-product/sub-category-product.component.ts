@@ -152,9 +152,12 @@ export class SubCategoryProductComponent implements OnInit {
       this.category = null;
       this.subCategory = null;
       this.subCategoryOptions = [];
+      this.fromGroup.get('category').setValue(null);
+      this.fromGroup.get('subCategory').setValue(null);
     }
     if (num === 2) {
       this.subCategory = null;
+      this.fromGroup.get('subCategory').setValue(null);
     }
   }
 
