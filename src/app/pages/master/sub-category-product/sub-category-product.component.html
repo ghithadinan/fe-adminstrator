@@ -88,7 +88,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <app-button [loading]="loading.data" btnClass="btn-primary" btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
+      <app-button [loading]="loading.data" [btnDisabled]="fromGroup.invalid" btnClass="btn-primary"
+                  btnId="save-{{title.toLowerCase()}}" btnTitle="Save"
                   btnType="submit">
         Save
       </app-button>
